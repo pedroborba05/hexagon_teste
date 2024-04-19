@@ -2,12 +2,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.hexagon_tecnico.data.local.db.daos.PersonDao
+import com.example.hexagon_tecnico.data.local.db.daos.DaoPerson
 import com.example.hexagon_tecnico.data.local.db.entity.Person
 
-@Database(entities = [Person::class], version = 1, exportSchema = false)
+@Database(entities = [Person::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun personDao(): PersonDao
+    abstract fun daoPerson(): DaoPerson
 
     companion object {
         @Volatile

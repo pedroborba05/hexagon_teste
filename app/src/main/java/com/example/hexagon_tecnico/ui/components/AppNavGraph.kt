@@ -17,7 +17,10 @@ fun AppNavGraph(navController: NavHostController, paddingValues: PaddingValues) 
         modifier = Modifier.padding(paddingValues = PaddingValues())
 
     ) {
-        composable("person_list") {
+        composable("main_screen") {
+            MainScreen()
+        }
+         composable("person_list") {
             PersonListScreen(PersonUtil.samplePersonList(), navController)
         }
         composable("create_person") {
