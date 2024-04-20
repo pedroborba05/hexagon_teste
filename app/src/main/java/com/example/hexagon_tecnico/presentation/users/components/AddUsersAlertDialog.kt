@@ -1,4 +1,4 @@
-package com.example.hexagon_tecnico.presentation.books.components
+package com.example.hexagon_tecnico.presentation.users.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer

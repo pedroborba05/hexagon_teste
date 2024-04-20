@@ -1,4 +1,4 @@
-package com.example.hexagon_tecnico.presentation.books
+package com.example.hexagon_tecnico.presentation.users
 
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Scaffold
@@ -6,10 +6,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.hexagon_tecnico.presentation.books.components.AddUsersAlertDialog
-import com.example.hexagon_tecnico.presentation.books.components.AddUsersFloatingActionButton
-import com.example.hexagon_tecnico.presentation.books.components.UsersContent
-import com.example.hexagon_tecnico.presentation.books.components.UsersTopBar
+import com.example.hexagon_tecnico.presentation.users.components.AddUsersAlertDialog
+import com.example.hexagon_tecnico.presentation.users.components.AddUsersFloatingActionButton
+import com.example.hexagon_tecnico.presentation.users.components.UsersContent
+import com.example.hexagon_tecnico.presentation.users.components.UsersTopBar
 
 @Composable
 @ExperimentalMaterialApi

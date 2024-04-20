@@ -7,7 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.hexagon_tecnico.navigation.Screen.UpdateUsersScreen
 import com.example.hexagon_tecnico.navigation.Screen.UsersScreen
-import com.example.hexagon_tecnico.presentation.books.UsersScreen
+import com.example.hexagon_tecnico.presentation.users.UsersScreen
 
 
 @Composable

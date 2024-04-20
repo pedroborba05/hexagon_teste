@@ -1,4 +1,4 @@
-package com.example.hexagon_tecnico.presentation.books
+package com.example.hexagon_tecnico.presentation.users
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
