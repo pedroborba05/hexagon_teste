@@ -1,4 +1,4 @@
-package ro.alexmamo.roomjetpackcompose.presentation.books.components
+package com.example.hexagon_tecnico.presentation.books.components
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable

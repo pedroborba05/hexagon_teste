@@ -6,35 +6,35 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
-import ro.alexmamo.roomjetpackcompose.presentation.books.components.AddBookAlertDialog
-import ro.alexmamo.roomjetpackcompose.presentation.books.components.AddBookFloatingActionButton
-import ro.alexmamo.roomjetpackcompose.presentation.books.components.BooksContent
-import ro.alexmamo.roomjetpackcompose.presentation.books.components.BooksTopBar
+import com.example.hexagon_tecnico.presentation.books.components.AddUsersAlertDialog
+import com.example.hexagon_tecnico.presentation.books.components.AddUsersFloatingActionButton
+import com.example.hexagon_tecnico.presentation.books.components.UsersContent
+import com.example.hexagon_tecnico.presentation.books.components.UsersTopBar
 
 @Composable
 @ExperimentalMaterialApi
-fun BooksScreen(
-    viewModel: BooksViewModel = hiltViewModel(),
+fun UsersScreen(
+    viewModel: UsersViewModel = hiltViewModel(),
     navigateToUpdateBookScreen: (bookId: Int) -> Unit
 ) {
-    val books by viewModel.books.collectAsState(
+    val books by viewModel.users.collectAsState(
         initial = emptyList()
     )
 
     Scaffold(
         topBar = {
-            BooksTopBar()
+            UsersTopBar()
         },
         content = { padding ->
-            BooksContent(
+            UsersContent(
                 padding = padding,
-                books = books,
+                users = books,
                 deleteBook = { book ->
-                    viewModel.deleteBook(book)
+                    viewModel.deleteUser(book)
                 },
                 navigateToUpdateBookScreen = navigateToUpdateBookScreen
             )
-            AddBookAlertDialog(
+            AddUsersAlertDialog(
                 openDialog = viewModel.openDialog,
                 closeDialog = {
                     viewModel.closeDialog()
@@ -45,7 +45,7 @@ fun BooksScreen(
             )
         },
         floatingActionButton = {
-            AddBookFloatingActionButton(
+            AddUsersFloatingActionButton(
                 openDialog = {
                     viewModel.openDialog()
                 }

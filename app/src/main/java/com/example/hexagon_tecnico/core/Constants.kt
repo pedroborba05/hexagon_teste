@@ -3,11 +3,11 @@ package com.example.hexagon_tecnico.core
 class Constants {
     companion object {
         //Room
-        const val BOOK_TABLE = "book_table"
+        const val USER_TABLE = "user_table"
 
         //Screens
-        const val BOOKS_SCREEN = "Books"
-        const val UPDATE_BOOK_SCREEN = "Update book"
+        const val USERS_SCREEN = "Usuarios"
+        const val UPDATE_USERS_SCREEN = "Update user"
 
         //Arguments
         const val BOOK_ID = "bookId"

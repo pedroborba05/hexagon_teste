@@ -1,4 +1,4 @@
-package ro.alexmamo.roomjetpackcompose.presentation.books.components
+package com.example.hexagon_tecnico.presentation.books.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -23,14 +23,14 @@ import com.example.hexagon_tecnico.core.Constants.Companion.AUTHOR
 import com.example.hexagon_tecnico.core.Constants.Companion.BOOK_TITLE
 import com.example.hexagon_tecnico.core.Constants.Companion.DISMISS_BUTTON
 import com.example.hexagon_tecnico.core.Constants.Companion.EMPTY_STRING
-import com.example.hexagon_tecnico.domain.model.Book
+import com.example.hexagon_tecnico.domain.model.User
 import kotlinx.coroutines.job
 
 @Composable
-fun AddBookAlertDialog(
+fun AddUsersAlertDialog(
     openDialog: Boolean,
     closeDialog: () -> Unit,
-    addBook: (book: Book) -> Unit
+    addBook: (user: User) -> Unit
 ) {
     if (openDialog) {
         var title by remember { mutableStateOf(EMPTY_STRING) }
@@ -79,8 +79,8 @@ fun AddBookAlertDialog(
                 TextButton(
                     onClick = {
                         closeDialog()
-                        val book = Book(0, title, author)
-                        addBook(book)
+                        val user = User(0, title, author)
+                        addBook(user)
                     }
                 ) {
                     Text(

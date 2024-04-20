@@ -5,9 +5,9 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.hexagon_tecnico.navigation.Screen.BooksScreen
-import com.example.hexagon_tecnico.navigation.Screen.UpdateBookScreen
-import com.example.hexagon_tecnico.presentation.books.BooksScreen
+import com.example.hexagon_tecnico.navigation.Screen.UpdateUsersScreen
+import com.example.hexagon_tecnico.navigation.Screen.UsersScreen
+import com.example.hexagon_tecnico.presentation.books.UsersScreen
 
 
 @Composable
@@ -17,15 +17,15 @@ fun NavGraph (
 ) {
     NavHost(
         navController = navController,
-        startDestination = BooksScreen.route
+        startDestination = UsersScreen.route
     ) {
         composable(
-            route = BooksScreen.route
+            route = UsersScreen.route
         ) {
-            BooksScreen(
+            UsersScreen(
                 navigateToUpdateBookScreen = { bookId ->
                     navController.navigate(
-                        route = "${UpdateBookScreen.route}/${bookId}"
+                        route = "${UpdateUsersScreen.route}/${bookId}"
                     )
                 }
             )

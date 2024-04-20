@@ -1,4 +1,4 @@
-package ro.alexmamo.roomjetpackcompose.presentation.books.components
+package com.example.hexagon_tecnico.presentation.books.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,12 +12,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.hexagon_tecnico.domain.model.Book
+import com.example.hexagon_tecnico.domain.model.User
 
 @Composable
 @ExperimentalMaterialApi
-fun BookCard(
-    book: Book,
+fun UsersCard(
+    user: User,
     deleteBook: () -> Unit,
     navigateToUpdateBookScreen: (bookId: Int) -> Unit
 ) {
@@ -33,7 +33,7 @@ fun BookCard(
             .fillMaxWidth(),
         elevation = 3.dp,
         onClick = {
-            navigateToUpdateBookScreen(book.id)
+            navigateToUpdateBookScreen(user.id)
         }
     ) {
         Row(
@@ -42,10 +42,10 @@ fun BookCard(
         ) {
             Column {
                 TextTitle(
-                    bookTitle = book.title
+                    bookTitle = user.title
                 )
                 TextAuthor(
-                    bookAuthor = book.author
+                    bookAuthor = user.author
                 )
             }
             Spacer(

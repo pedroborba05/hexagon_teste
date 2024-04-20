@@ -2,10 +2,10 @@ package com.example.hexagon_tecnico.domain.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.hexagon_tecnico.core.Constants.Companion.BOOK_TABLE
+import com.example.hexagon_tecnico.core.Constants.Companion.USER_TABLE
 
-@Entity(tableName = BOOK_TABLE)
-data class Book(
+@Entity(tableName = USER_TABLE)
+data class User(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     val title: String,

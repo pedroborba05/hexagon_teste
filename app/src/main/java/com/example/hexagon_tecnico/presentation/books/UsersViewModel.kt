@@ -6,46 +6,46 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.hexagon_tecnico.core.Constants.Companion.EMPTY_STRING
-import com.example.hexagon_tecnico.domain.model.Book
-import com.example.hexagon_tecnico.domain.repository.BookRepository
+import com.example.hexagon_tecnico.domain.model.User
+import com.example.hexagon_tecnico.domain.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class BooksViewModel @Inject constructor(
-    private val repo: BookRepository
+class UsersViewModel @Inject constructor(
+    private val repo: UserRepository
 ) : ViewModel() {
-    var book by mutableStateOf(Book(0, EMPTY_STRING, EMPTY_STRING))
+    var user by mutableStateOf(User(0, EMPTY_STRING, EMPTY_STRING))
         private set
     var openDialog by mutableStateOf(false)
 
-    val books = repo.getBooksFromRoom()
+    val users = repo.getUsersFromRoom()
 
-    fun getBook(id: Int) = viewModelScope.launch {
-        book = repo.getBookFromRoom(id)
+    fun getUser(id: Int) = viewModelScope.launch {
+        user = repo.getUserFromRoom(id)
     }
 
-    fun addBook(book: Book) = viewModelScope.launch {
-        repo.addBookToRoom(book)
+    fun addBook(user: User) = viewModelScope.launch {
+        repo.addUserToRoom(user)
     }
 
-    fun updateBook(book: Book) = viewModelScope.launch {
-        repo.updateBookInRoom(book)
+    fun updateBook(user: User) = viewModelScope.launch {
+        repo.updateUserInRoom(user)
     }
 
-    fun deleteBook(book: Book) = viewModelScope.launch {
-        repo.deleteBookFromRoom(book)
+    fun deleteUser(user: User) = viewModelScope.launch {
+        repo.deleteUserFromRoom(user)
     }
 
     fun updateTitle(title: String) {
-        book = book.copy(
+        user = user.copy(
             title = title
         )
     }
 
     fun updateAuthor(author: String) {
-        book = book.copy(
+        user = user.copy(
             author = author
         )
     }

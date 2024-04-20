@@ -1,16 +1,16 @@
-package ro.alexmamo.roomjetpackcompose.presentation.books.components
+package com.example.hexagon_tecnico.presentation.books.components
 
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
-import com.example.hexagon_tecnico.core.Constants.Companion.BOOKS_SCREEN
+import com.example.hexagon_tecnico.core.Constants.Companion.USERS_SCREEN
 
 @Composable
-fun BooksTopBar() {
+fun UsersTopBar() {
     TopAppBar (
         title = {
             Text(
-                text = BOOKS_SCREEN
+                text = USERS_SCREEN
             )
         }
     )

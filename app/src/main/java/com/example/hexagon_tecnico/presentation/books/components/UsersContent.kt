@@ -1,4 +1,4 @@
-package ro.alexmamo.roomjetpackcompose.presentation.books.components
+package com.example.hexagon_tecnico.presentation.books.components
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,25 +8,25 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.example.hexagon_tecnico.domain.model.Book
-import com.example.hexagon_tecnico.domain.repository.Books
+import com.example.hexagon_tecnico.domain.model.User
+import com.example.hexagon_tecnico.domain.repository.Users
 
 @Composable
 @ExperimentalMaterialApi
-fun BooksContent(
+fun UsersContent(
     padding: PaddingValues,
-    books: Books,
-    deleteBook: (book: Book) -> Unit,
+    users: Users,
+    deleteBook: (user: User) -> Unit,
     navigateToUpdateBookScreen: (bookId: Int) -> Unit
 ) {
     LazyColumn(
         modifier = Modifier.fillMaxSize().padding(padding)
     ) {
         items(
-            items = books
+            items = users
         ) { book ->
-            BookCard(
-                book = book,
+            UsersCard(
+                user = book,
                 deleteBook = {
                     deleteBook(book)
                 },
