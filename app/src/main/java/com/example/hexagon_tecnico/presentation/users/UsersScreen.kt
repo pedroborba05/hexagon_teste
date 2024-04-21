@@ -15,9 +15,9 @@ import com.example.hexagon_tecnico.presentation.users.components.UsersTopBar
 @ExperimentalMaterialApi
 fun UsersScreen(
     viewModel: UsersViewModel = hiltViewModel(),
-    navigateToUpdateBookScreen: (bookId: Int) -> Unit
+    navigateToUpdateUserScreen: (bookId: Int) -> Unit
 ) {
-    val books by viewModel.users.collectAsState(
+    val users by viewModel.users.collectAsState(
         initial = emptyList()
     )
 
@@ -28,19 +28,19 @@ fun UsersScreen(
         content = { padding ->
             UsersContent(
                 padding = padding,
-                users = books,
-                deleteBook = { book ->
-                    viewModel.deleteUser(book)
+                users = users,
+                deleteUser = { user ->
+                    viewModel.deleteUser(user)
                 },
-                navigateToUpdateBookScreen = navigateToUpdateBookScreen
+                navigateToUpdateUserScreen = navigateToUpdateUserScreen
             )
             AddUsersAlertDialog(
                 openDialog = viewModel.openDialog,
                 closeDialog = {
                     viewModel.closeDialog()
                 },
-                addBook = { book ->
-                    viewModel.addBook(book)
+                addUser = { user ->
+                    viewModel.addUser(user)
                 }
             )
         },

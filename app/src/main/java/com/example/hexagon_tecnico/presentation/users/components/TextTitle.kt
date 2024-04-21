@@ -7,10 +7,10 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun TextTitle(
-    bookTitle: String
+    userName: String
 ) {
     Text(
-        text = bookTitle,
+        text = userName,
         color = Color.DarkGray,
         fontSize = 25.sp
     )

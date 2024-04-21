@@ -13,17 +13,19 @@ class Constants {
         const val BOOK_ID = "bookId"
 
         //Actions
-        const val ADD_BOOK = "Add a book."
-        const val DELETE_BOOK = "Delete a book."
+        const val ADD_USER = "Adicionar usuário"
+        const val DELETE_USER = "Deletar usuário"
 
         //Buttons
-        const val ADD_BUTTON = "Add"
-        const val DISMISS_BUTTON = "Dismiss"
+        const val ADD_BUTTON = "Adicionar"
+        const val DISMISS_BUTTON = "Voltar"
         const val UPDATE_BUTTON = "Update"
 
         //Placeholders
-        const val BOOK_TITLE = "Type a book title..."
-        const val AUTHOR = "Type the author name..."
+        const val USER_NAME = "Informe o seu nome"
+        const val AGE = "Informe a sua idade"
+        const val CPF = "Informe o seu CPF"
+        const val CITY = "Informe a sua cidade"
         const val EMPTY_STRING = ""
     }
 }

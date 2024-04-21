@@ -23,7 +23,7 @@ fun NavGraph (
             route = UsersScreen.route
         ) {
             UsersScreen(
-                navigateToUpdateBookScreen = { bookId ->
+                navigateToUpdateUserScreen = { bookId ->
                     navController.navigate(
                         route = "${UpdateUsersScreen.route}/${bookId}"
                     )

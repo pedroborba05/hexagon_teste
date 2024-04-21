@@ -16,21 +16,21 @@ import com.example.hexagon_tecnico.domain.repository.Users
 fun UsersContent(
     padding: PaddingValues,
     users: Users,
-    deleteBook: (user: User) -> Unit,
-    navigateToUpdateBookScreen: (bookId: Int) -> Unit
+    deleteUser: (user: User) -> Unit,
+    navigateToUpdateUserScreen: (userId: Int) -> Unit
 ) {
     LazyColumn(
         modifier = Modifier.fillMaxSize().padding(padding)
     ) {
         items(
             items = users
-        ) { book ->
+        ) { user ->
             UsersCard(
-                user = book,
-                deleteBook = {
-                    deleteBook(book)
+                user = user,
+                deleteUser = {
+                    deleteUser(user)
                 },
-                navigateToUpdateBookScreen = navigateToUpdateBookScreen
+                navigateToUpdateUserScreen = navigateToUpdateUserScreen
             )
         }
     }

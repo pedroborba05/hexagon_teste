@@ -1,5 +1,6 @@
 package com.example.hexagon_tecnico.presentation.users
 
+import android.net.Uri
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -16,7 +17,7 @@ import javax.inject.Inject
 class UsersViewModel @Inject constructor(
     private val repo: UserRepository
 ) : ViewModel() {
-    var user by mutableStateOf(User(0, EMPTY_STRING, EMPTY_STRING))
+    var user by mutableStateOf(User(0, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, Uri.EMPTY))
         private set
     var openDialog by mutableStateOf(false)
 
@@ -26,7 +27,7 @@ class UsersViewModel @Inject constructor(
         user = repo.getUserFromRoom(id)
     }
 
-    fun addBook(user: User) = viewModelScope.launch {
+    fun addUser(user: User) = viewModelScope.launch {
         repo.addUserToRoom(user)
     }
 
@@ -38,15 +39,15 @@ class UsersViewModel @Inject constructor(
         repo.deleteUserFromRoom(user)
     }
 
-    fun updateTitle(title: String) {
+    fun updateTitle(name: String) {
         user = user.copy(
-            title = title
+            name = name
         )
     }
 
-    fun updateAuthor(author: String) {
+    fun updateAuthor(age: String) {
         user = user.copy(
-            author = author
+            age = age
         )
     }
 

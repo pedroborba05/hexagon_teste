@@ -8,10 +8,10 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun TextAuthor(
-    bookAuthor: String
+    userAge: String
 ) {
     Text(
-        text = "by $bookAuthor",
+        text = "Idade: $userAge",
         color = Color.DarkGray,
         fontSize = 12.sp,
         textDecoration = TextDecoration.Underline

@@ -6,7 +6,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
-import com.example.hexagon_tecnico.core.Constants.Companion.ADD_BOOK
+import com.example.hexagon_tecnico.core.Constants.Companion.ADD_USER
 
 @Composable
 fun AddUsersFloatingActionButton(
@@ -18,7 +18,7 @@ fun AddUsersFloatingActionButton(
     ) {
         Icon(
             imageVector = Icons.Default.Add,
-            contentDescription = ADD_BOOK
+            contentDescription = ADD_USER
         )
     }
 }

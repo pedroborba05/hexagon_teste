@@ -14,12 +14,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.hexagon_tecnico.domain.model.User
 
+
 @Composable
 @ExperimentalMaterialApi
 fun UsersCard(
     user: User,
-    deleteBook: () -> Unit,
-    navigateToUpdateBookScreen: (bookId: Int) -> Unit
+    deleteUser: () -> Unit,
+    navigateToUpdateUserScreen: (bookId: Int) -> Unit
 ) {
     Card(
         shape = MaterialTheme.shapes.small,
@@ -33,26 +34,31 @@ fun UsersCard(
             .fillMaxWidth(),
         elevation = 3.dp,
         onClick = {
-            navigateToUpdateBookScreen(user.id)
+            navigateToUpdateUserScreen(user.id)
         }
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth().padding(12.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(12.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Column {
+                UserImage(
+                    uri = user.imageUri, 80.dp, 80.dp
+                )
                 TextTitle(
-                    bookTitle = user.title
+                    userName = user.name
                 )
                 TextAuthor(
-                    bookAuthor = user.author
+                    userAge = user.age
                 )
             }
             Spacer(
                 modifier = Modifier.weight(1f)
             )
             DeleteIcon(
-                deleteBook = deleteBook
+                deleteBook = deleteUser
             )
         }
     }

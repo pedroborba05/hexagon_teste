@@ -5,7 +5,7 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
-import com.example.hexagon_tecnico.core.Constants.Companion.DELETE_BOOK
+import com.example.hexagon_tecnico.core.Constants.Companion.DELETE_USER
 
 @Composable
 fun DeleteIcon(
@@ -16,7 +16,7 @@ fun DeleteIcon(
     ) {
         Icon(
             imageVector = Icons.Default.Delete,
-            contentDescription = DELETE_BOOK,
+            contentDescription = DELETE_USER,
         )
     }
 }
