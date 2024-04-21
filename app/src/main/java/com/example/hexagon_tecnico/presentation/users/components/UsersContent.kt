@@ -9,14 +9,13 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.example.hexagon_tecnico.domain.model.User
-import com.example.hexagon_tecnico.domain.repository.Users
 
 @Composable
 @ExperimentalMaterialApi
 fun UsersContent(
     padding: PaddingValues,
-    users: Users,
-    deleteUser: (user: User) -> Unit,
+    users: List<User>,
+    inativeUser: (user: User) -> Unit,
     navigateToUpdateUserScreen: (userId: Int) -> Unit
 ) {
     LazyColumn(
@@ -28,7 +27,7 @@ fun UsersContent(
             UsersCard(
                 user = user,
                 deleteUser = {
-                    deleteUser(user)
+                    inativeUser(user)
                 },
                 navigateToUpdateUserScreen = navigateToUpdateUserScreen
             )

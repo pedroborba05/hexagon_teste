@@ -4,7 +4,9 @@ import android.net.Uri
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.hexagon_tecnico.core.Constants.Companion.EMPTY_STRING
 import com.example.hexagon_tecnico.domain.model.User
@@ -17,7 +19,10 @@ import javax.inject.Inject
 class UsersViewModel @Inject constructor(
     private val repo: UserRepository
 ) : ViewModel() {
-    var user by mutableStateOf(User(0, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, Uri.EMPTY))
+    val activeUsers: LiveData<List<User>> = repo.getActiveUsersFromRoom().asLiveData(viewModelScope.coroutineContext)
+
+
+    var user by mutableStateOf(User(0, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, Uri.EMPTY, isActive = false))
         private set
     var openDialog by mutableStateOf(false)
 
@@ -37,6 +42,10 @@ class UsersViewModel @Inject constructor(
 
     fun deleteUser(user: User) = viewModelScope.launch {
         repo.deleteUserFromRoom(user)
+    }
+
+    fun inativeUser(user: User) = viewModelScope.launch {
+        repo.inactivateUserInRoom(user)
     }
 
     fun updateTitle(name: String) {

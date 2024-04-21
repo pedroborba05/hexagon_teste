@@ -20,7 +20,7 @@ import com.example.hexagon_tecnico.domain.model.User
 fun UsersCard(
     user: User,
     deleteUser: () -> Unit,
-    navigateToUpdateUserScreen: (bookId: Int) -> Unit
+    navigateToUpdateUserScreen: (userId: Int) -> Unit
 ) {
     Card(
         shape = MaterialTheme.shapes.small,

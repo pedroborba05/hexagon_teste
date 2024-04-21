@@ -27,4 +27,10 @@ interface UserDao {
 
     @Delete
     suspend fun deleteUser(user: User)
+
+    @Query("UPDATE $USER_TABLE SET isActive = :isActive WHERE id = :userId")
+    suspend fun inactivateUser(userId: Int, isActive: Boolean)
+
+    @Query("SELECT * FROM $USER_TABLE WHERE isActive = 1")
+    fun getActiveUsers(): Flow<List<User>>
 }

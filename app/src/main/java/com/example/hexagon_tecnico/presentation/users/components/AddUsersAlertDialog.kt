@@ -137,7 +137,7 @@ fun AddUsersAlertDialog(
                 TextButton(
                     onClick = {
                         closeDialog()
-                        val user = User(0, name = name, age = age, cpf = cpf, city = city, imageUri = imageUri)
+                        val user = User(0, name = name, age = age, cpf = cpf, city = city, imageUri = imageUri, isActive = true)
                         addUser(user)
                     }
                 ) {

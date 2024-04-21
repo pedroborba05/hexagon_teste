@@ -15,4 +15,8 @@ interface UserRepository {
     suspend fun updateUserInRoom(user: User)
 
     suspend fun deleteUserFromRoom(user: User)
+
+    suspend fun inactivateUserInRoom(user: User)
+
+    fun getActiveUsersFromRoom(): Flow<List<User>>
 }
