@@ -33,4 +33,7 @@ interface UserDao {
 
     @Query("SELECT * FROM $USER_TABLE WHERE isActive = 1")
     fun getActiveUsers(): Flow<List<User>>
+
+    @Query("SELECT * FROM $USER_TABLE WHERE isActive = 0")
+    fun getInactiveUsers(): Flow<List<User>>
 }

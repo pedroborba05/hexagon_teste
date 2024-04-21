@@ -21,4 +21,6 @@ class UserRepositoryImpl(
     override suspend fun inactivateUserInRoom(user: User) = userDao.inactivateUser(user.id, false)
 
     override fun getActiveUsersFromRoom(): Flow<List<User>> = userDao.getActiveUsers()
+
+    override fun getInactiveUsersFromRoom(): Flow<List<User>> = userDao.getInactiveUsers()
 }

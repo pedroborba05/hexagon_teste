@@ -20,6 +20,7 @@ class UsersViewModel @Inject constructor(
     private val repo: UserRepository
 ) : ViewModel() {
     val activeUsers: LiveData<List<User>> = repo.getActiveUsersFromRoom().asLiveData(viewModelScope.coroutineContext)
+    val inactiveUsers: LiveData<List<User>> = repo.getInactiveUsersFromRoom().asLiveData(viewModelScope.coroutineContext)
 
 
     var user by mutableStateOf(User(0, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, Uri.EMPTY, isActive = false))

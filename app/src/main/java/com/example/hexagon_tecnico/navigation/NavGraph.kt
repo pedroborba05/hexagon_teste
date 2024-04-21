@@ -5,8 +5,10 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.hexagon_tecnico.navigation.Screen.InactivateUsersScreen
 import com.example.hexagon_tecnico.navigation.Screen.UpdateUsersScreen
 import com.example.hexagon_tecnico.navigation.Screen.UsersScreen
+import com.example.hexagon_tecnico.presentation.inactiveusers.InactiveUsersScreen
 import com.example.hexagon_tecnico.presentation.users.UsersScreen
 
 
@@ -27,8 +29,16 @@ fun NavGraph (
                     navController.navigate(
                         route = "${UpdateUsersScreen.route}/${bookId}"
                     )
+                },
+                navigateToInactiveUsersScreen = {
+                    navController.navigate(InactivateUsersScreen.route)
                 }
             )
+        }
+        composable(
+            route = InactivateUsersScreen.route
+        ) {
+            InactiveUsersScreen()
         }
     }
 }

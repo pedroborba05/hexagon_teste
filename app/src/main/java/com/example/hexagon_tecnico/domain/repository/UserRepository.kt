@@ -19,4 +19,6 @@ interface UserRepository {
     suspend fun inactivateUserInRoom(user: User)
 
     fun getActiveUsersFromRoom(): Flow<List<User>>
+
+    fun getInactiveUsersFromRoom(): Flow<List<User>>
 }
