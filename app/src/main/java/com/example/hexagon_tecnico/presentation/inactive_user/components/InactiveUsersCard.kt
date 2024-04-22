@@ -1,4 +1,4 @@
-package com.example.hexagon_tecnico.presentation.inactiveusers.components
+package com.example.hexagon_tecnico.presentation.inactive_user.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,7 +13,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.hexagon_tecnico.domain.model.User
-import com.example.hexagon_tecnico.presentation.users.components.DeleteIcon
 import com.example.hexagon_tecnico.presentation.users.components.TextAuthor
 import com.example.hexagon_tecnico.presentation.users.components.TextTitle
 import com.example.hexagon_tecnico.presentation.users.components.UserImage
@@ -23,7 +22,7 @@ import com.example.hexagon_tecnico.presentation.users.components.UserImage
 @ExperimentalMaterialApi
 fun UsersInactiveCard(
     user: User,
-    deleteUser: () -> Unit,
+    activeUsers: () -> Unit,
 ) {
     Card(
         shape = MaterialTheme.shapes.small,
@@ -57,8 +56,8 @@ fun UsersInactiveCard(
             Spacer(
                 modifier = Modifier.weight(1f)
             )
-            DeleteIcon(
-                deleteBook = deleteUser
+            ActiveUsersIcon(
+                activeUsers = activeUsers
             )
         }
     }

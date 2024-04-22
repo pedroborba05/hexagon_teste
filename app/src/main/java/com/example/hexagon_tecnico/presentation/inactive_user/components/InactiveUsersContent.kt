@@ -1,4 +1,4 @@
-package com.example.hexagon_tecnico.presentation.inactiveusers.components
+package com.example.hexagon_tecnico.presentation.inactive_user.components
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,7 +15,7 @@ import com.example.hexagon_tecnico.domain.model.User
 fun UsersInactiveContent(
     padding: PaddingValues,
     users: List<User>,
-    activeUser: (user: User) -> Unit,
+    activeUsers: (user: User) -> Unit,
 ) {
     LazyColumn(
         modifier = Modifier.fillMaxSize().padding(padding)
@@ -25,8 +25,8 @@ fun UsersInactiveContent(
         ) { user ->
             UsersInactiveCard(
                 user = user,
-                deleteUser = {
-                    activeUser(user)
+                activeUsers = {
+                    activeUsers(user)
                 }
             )
         }

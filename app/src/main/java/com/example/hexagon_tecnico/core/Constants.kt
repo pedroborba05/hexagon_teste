@@ -9,6 +9,7 @@ class Constants {
         const val USERS_SCREEN = "Usuários"
         const val UPDATE_USERS_SCREEN = "update_users"
         const val INACTIVE_USERS_SCREEN = "Usuários inativos"
+        const val ADD_USERS_SCREEN = "Adicionar usuário"
 
         //Arguments
         const val BOOK_ID = "bookId"

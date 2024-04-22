@@ -49,6 +49,10 @@ class UsersViewModel @Inject constructor(
         repo.inactivateUserInRoom(user)
     }
 
+    fun activeUser(user: User) = viewModelScope.launch {
+        repo.activeUserInRoom(user)
+    }
+
     fun updateTitle(name: String) {
         user = user.copy(
             name = name
