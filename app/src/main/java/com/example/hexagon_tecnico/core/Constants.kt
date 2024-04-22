@@ -12,16 +12,16 @@ class Constants {
         const val ADD_USERS_SCREEN = "Adicionar usuário"
 
         //Arguments
-        const val BOOK_ID = "bookId"
+        const val USER_ID = "userId"
 
         //Actions
         const val ADD_USER = "Adicionar usuário"
-        const val DELETE_USER = "Deletar usuário"
+        const val INACTIVE_USER = "Inativar usuário"
 
         //Buttons
         const val ADD_BUTTON = "Adicionar"
         const val DISMISS_BUTTON = "Voltar"
-        const val UPDATE_BUTTON = "Update"
+        const val UPDATE_BUTTON = "Atualizar"
 
         //Placeholders
         const val USER_NAME = "Informe o seu nome"

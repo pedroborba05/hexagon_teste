@@ -1,4 +1,4 @@
-package com.example.hexagon_tecnico.presentation.inactive_user.components
+package com.example.hexagon_tecnico.presentation.update_user.components
 
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -9,11 +9,11 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.runtime.Composable
 
 @Composable
-fun InactiveUsersTopBar(
+fun AddUsersTopBar(
     navigateBack: () -> Unit
 ) {
     TopAppBar(
-        title = { Text("Usuários Inativos") },
+        title = { Text("Adicionar usuários") },
         navigationIcon = {
             IconButton(onClick = navigateBack) {
                 Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Voltar")

@@ -37,7 +37,7 @@ class UsersViewModel @Inject constructor(
         repo.addUserToRoom(user)
     }
 
-    fun updateBook(user: User) = viewModelScope.launch {
+    fun updateUser(user: User) = viewModelScope.launch {
         repo.updateUserInRoom(user)
     }
 
@@ -53,15 +53,27 @@ class UsersViewModel @Inject constructor(
         repo.activeUserInRoom(user)
     }
 
-    fun updateTitle(name: String) {
+    fun updateName(name: String) {
         user = user.copy(
             name = name
         )
     }
 
-    fun updateAuthor(age: String) {
+    fun updateAge(age: String) {
         user = user.copy(
             age = age
+        )
+    }
+
+    fun updateCpf(cpf: String) {
+        user = user.copy(
+            cpf = cpf
+        )
+    }
+
+    fun updateCity(city: String) {
+        user = user.copy(
+            city = city
         )
     }
 

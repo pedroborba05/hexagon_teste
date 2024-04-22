@@ -24,9 +24,8 @@ fun UsersScreen(
     navigateToAddUsersScreen: () -> Unit
 ) {
     val users by viewModel.activeUsers.observeAsState(initial = emptyList())
-    
-    LaunchedEffect(key1 = users) {
 
+    LaunchedEffect(Unit) {
     }
 
     Scaffold(

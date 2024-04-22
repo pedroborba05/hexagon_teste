@@ -14,14 +14,16 @@ import com.example.hexagon_tecnico.presentation.users.UsersViewModel
 @ExperimentalMaterialApi
 fun InactiveUsersScreen(
     viewModel: UsersViewModel = hiltViewModel(),
-    navigateToUsersScreen: () -> Unit
+    navigateBack: () -> Unit
     ) {
 
     val usersInactive by viewModel.inactiveUsers.observeAsState(initial = emptyList())
 
     Scaffold(
         topBar = {
-            InactiveUsersTopBar(navigateToUsersScreen = navigateToUsersScreen)
+            InactiveUsersTopBar(
+                navigateBack = navigateBack
+            )
         },
         content = { padding ->
             UsersInactiveContent(
