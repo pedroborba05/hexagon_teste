@@ -49,9 +49,11 @@ fun UsersInactiveCard(
                 TextTitle(
                     userName = user.name
                 )
-                TextAuthor(
-                    userAge = user.age
-                )
+                user.age?.let {
+                    TextAuthor(
+                        userAge = it
+                    )
+                }
             }
             Spacer(
                 modifier = Modifier.weight(1f)
