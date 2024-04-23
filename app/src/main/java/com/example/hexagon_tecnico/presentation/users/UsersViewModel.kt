@@ -4,14 +4,13 @@ import android.net.Uri
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.hexagon_tecnico.core.Constants.Companion.EMPTY_STRING
 import com.example.hexagon_tecnico.domain.model.User
 import com.example.hexagon_tecnico.domain.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -19,8 +18,8 @@ import javax.inject.Inject
 class UsersViewModel @Inject constructor(
     private val repo: UserRepository
 ) : ViewModel() {
-    val activeUsers: LiveData<List<User>> = repo.getActiveUsersFromRoom().asLiveData(viewModelScope.coroutineContext)
-    val inactiveUsers: LiveData<List<User>> = repo.getInactiveUsersFromRoom().asLiveData(viewModelScope.coroutineContext)
+    val activeUsers: Flow<List<User>> = repo.getActiveUsersFromRoom()
+    val inactiveUsers: Flow<List<User>> = repo.getInactiveUsersFromRoom()
 
 
     var user by mutableStateOf(User(0, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, Uri.EMPTY, isActive = false))
@@ -39,10 +38,6 @@ class UsersViewModel @Inject constructor(
 
     fun updateUser(user: User) = viewModelScope.launch {
         repo.updateUserInRoom(user)
-    }
-
-    fun deleteUser(user: User) = viewModelScope.launch {
-        repo.deleteUserFromRoom(user)
     }
 
     fun inativeUser(user: User) = viewModelScope.launch {
@@ -74,6 +69,12 @@ class UsersViewModel @Inject constructor(
     fun updateCity(city: String) {
         user = user.copy(
             city = city
+        )
+    }
+
+    fun updateImageUri(imageUri: Uri?) {
+        user = user.copy(
+            imageUri = imageUri
         )
     }
 
