@@ -3,8 +3,8 @@ package com.example.hexagon_tecnico.presentation.inactive_user
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.hexagon_tecnico.presentation.inactive_user.components.InactiveUsersTopBar
 import com.example.hexagon_tecnico.presentation.inactive_user.components.UsersInactiveContent
@@ -17,7 +17,7 @@ fun InactiveUsersScreen(
     navigateBack: () -> Unit
     ) {
 
-    val usersInactive by viewModel.inactiveUsers.observeAsState(initial = emptyList())
+    val usersInactive by viewModel.inactiveUsers.collectAsState(initial = emptyList())
 
     Scaffold(
         topBar = {
@@ -28,9 +28,9 @@ fun InactiveUsersScreen(
         content = { padding ->
             UsersInactiveContent(
                 padding = padding,
-                users = usersInactive,
+                usersInactive = usersInactive,
                 activeUsers = {
-                    user -> viewModel.activeUser(user)
+                    userInactive -> viewModel.activeUser(userInactive)
                 }
             )
         },

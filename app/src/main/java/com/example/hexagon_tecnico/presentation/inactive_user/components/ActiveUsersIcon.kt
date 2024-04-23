@@ -5,18 +5,20 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
-import com.example.hexagon_tecnico.core.Constants.Companion.INACTIVE_USER
+import com.example.hexagon_tecnico.core.Constants.Companion.ACTIVE_USER
 
 @Composable
 fun ActiveUsersIcon(
     activeUsers: () -> Unit
 ) {
     IconButton(
-        onClick = activeUsers
+        onClick = {
+            activeUsers()
+        }
     ) {
         Icon(
             imageVector = Icons.Default.Delete,
-            contentDescription = INACTIVE_USER,
+            contentDescription = ACTIVE_USER,
         )
     }
 }

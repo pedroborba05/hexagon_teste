@@ -9,10 +9,10 @@ import com.example.hexagon_tecnico.core.Constants.Companion.INACTIVE_USER
 
 @Composable
 fun DeleteIcon(
-    deleteBook: () -> Unit
+    inactiveUser: () -> Unit
 ) {
     IconButton(
-        onClick = deleteBook
+        onClick = inactiveUser
     ) {
         Icon(
             imageVector = Icons.Default.Delete,

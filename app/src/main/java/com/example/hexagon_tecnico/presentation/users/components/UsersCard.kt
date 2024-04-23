@@ -18,8 +18,8 @@ import com.example.hexagon_tecnico.domain.model.User
 @Composable
 @ExperimentalMaterialApi
 fun UsersCard(
-    user: User,
-    deleteUser: () -> Unit,
+    users: User,
+    inactiveUser: () -> Unit,
     navigateToUpdateUserScreen: (userId: Int) -> Unit
 ) {
     Card(
@@ -34,7 +34,7 @@ fun UsersCard(
             .fillMaxWidth(),
         elevation = 3.dp,
         onClick = {
-            navigateToUpdateUserScreen(user.id)
+            navigateToUpdateUserScreen(users.id)
         }
     ) {
         Row(
@@ -45,20 +45,20 @@ fun UsersCard(
         ) {
             Column {
                 UserImage(
-                    uri = user.imageUri, 80.dp, 80.dp
+                    uri = users.imageUri, 80.dp, 80.dp
                 )
                 TextTitle(
-                    userName = user.name
+                    userName = users.name
                 )
                 TextAuthor(
-                    userAge = user.age
+                    userAge = users.age
                 )
             }
             Spacer(
                 modifier = Modifier.weight(1f)
             )
             DeleteIcon(
-                deleteBook = deleteUser
+                inactiveUser = inactiveUser
             )
         }
     }

@@ -23,11 +23,11 @@ fun UsersContent(
     ) {
         items(
             items = users
-        ) { user ->
+        ) { users ->
             UsersCard(
-                user = user,
-                deleteUser = {
-                    inativeUser(user)
+                users = users,
+                inactiveUser = {
+                    inativeUser(users)
                 },
                 navigateToUpdateUserScreen = navigateToUpdateUserScreen
             )

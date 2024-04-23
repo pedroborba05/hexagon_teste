@@ -14,19 +14,19 @@ import com.example.hexagon_tecnico.domain.model.User
 @ExperimentalMaterialApi
 fun UsersInactiveContent(
     padding: PaddingValues,
-    users: List<User>,
+    usersInactive: List<User>,
     activeUsers: (user: User) -> Unit,
 ) {
     LazyColumn(
         modifier = Modifier.fillMaxSize().padding(padding)
     ) {
         items(
-            items = users
-        ) { user ->
+            items = usersInactive
+        ) { userInactive ->
             UsersInactiveCard(
-                user = user,
+                usersInactive = userInactive,
                 activeUsers = {
-                    activeUsers(user)
+                    activeUsers(userInactive)
                 }
             )
         }

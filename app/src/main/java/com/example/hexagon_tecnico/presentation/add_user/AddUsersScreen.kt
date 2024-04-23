@@ -10,9 +10,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -33,6 +33,12 @@ import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.OffsetMapping
+import androidx.compose.ui.text.input.TransformedText
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.hexagon_tecnico.domain.model.User
@@ -51,13 +57,12 @@ fun AddUsersScreen(
     navigateBack: () -> Unit
 ) {
     var name by remember { mutableStateOf("") }
-//    var age by remember { mutableStateOf<LocalDate?>(null) }
+    var age by remember() { mutableStateOf("")}
     var cpf by remember { mutableStateOf("") }
     var city by remember { mutableStateOf("") }
     var imageUri by remember { mutableStateOf<Uri?>(null) }
     var imageBitmap by remember { mutableStateOf<ImageBitmap?>(null) }
-    var showDatePickerDialog by remember { mutableStateOf(false) }  // Control the visibility of DatePickerDialog
-    var age by remember() { mutableStateOf("")}
+    var showDatePickerDialog by remember { mutableStateOf(false) }
     val datePickerState = rememberDatePickerState()
     val focusManager = LocalFocusManager.current
     DatePicker(state = datePickerState)
@@ -119,15 +124,16 @@ fun AddUsersScreen(
             TextField(
                 value = name,
                 onValueChange = { name = it },
-                label = { Text("Nome do Usuário") }
+                label = { Text("Nome") },
+                keyboardOptions = KeyboardOptions(
+                    capitalization = KeyboardCapitalization.Sentences,
+                )
             )
             Spacer(modifier = Modifier.height(16.dp))
             TextField(
                 value = age,
                 onValueChange = { age = it },
                 Modifier
-                    .padding(8.dp)
-                    .fillMaxWidth()
                     .onFocusChanged {
                         if (it.isFocused) {
                             showDatePickerDialog = true
@@ -135,21 +141,34 @@ fun AddUsersScreen(
                         }
                     },
                 label = {
-                    Text("Date")
+                    Text("Data de Nascimento")
                 },
                 readOnly = true
             )
             Spacer(modifier = Modifier.height(16.dp))
             TextField(
                 value = cpf,
-                onValueChange = { cpf = it },
-                label = { Text("CPF") }
+                onValueChange = {
+                    if (it.length <= 11) {
+                        cpf = it
+                    }
+                },
+                label = { Text("CPF") },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Number
+                ),
+                visualTransformation =  formatCpf()
+
             )
             Spacer(modifier = Modifier.height(16.dp))
             TextField(
                 value = city,
                 onValueChange = { city = it },
-                label = { Text("Cidade") }
+                label = { Text("Cidade") },
+                keyboardOptions = KeyboardOptions(
+                    capitalization = KeyboardCapitalization.Sentences
+                )
+
             )
             Button(onClick = {
                 requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -175,7 +194,7 @@ fun AddUsersScreen(
                     viewModel.addUser(user)
                     Toast.makeText(context, "Usuário adicionado!", Toast.LENGTH_SHORT).show()
 
-                    name = ""; age = ""; cpf = ""; city = ""
+                    name = ""; age = ""; cpf = ""; city = ""; imageUri = null
                 }
             ) {
                 Text("Adicionar Usuário")
@@ -194,4 +213,40 @@ fun Long.toBrazilianDateFormat(
         timeZone = TimeZone.getTimeZone("GMT")
     }
     return formatter.format(date)
+}
+
+fun formatCpf(): VisualTransformation {
+    return VisualTransformation { text ->
+        val digits = text.filter { it.isDigit() }
+        var out = ""
+        for (i in digits.indices) {
+            when (i) {
+                3, 6 -> out += ".${digits[i]}"
+                9 -> out += "-${digits[i]}"
+                else -> out += digits[i]
+            }
+            if (i == 10) break
+        }
+
+        val formattedText = AnnotatedString(out)
+        val offsetMapping = object : OffsetMapping {
+            override fun originalToTransformed(offset: Int): Int {
+                if (offset <= 3) return offset
+                if (offset <= 6) return offset + 1
+                if (offset <= 9) return offset + 2
+                if (offset <= 11) return offset + 3
+                return 14
+            }
+
+            override fun transformedToOriginal(offset: Int): Int {
+                if (offset <= 3) return offset
+                if (offset <= 7) return offset - 1
+                if (offset <= 11) return offset - 2
+                if (offset <= 14) return offset - 3
+                return 11
+            }
+        }
+
+        TransformedText(formattedText, offsetMapping)
+    }
 }

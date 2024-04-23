@@ -37,8 +37,11 @@ fun UpdateUsersScreen(
                     viewModel.updateCpf(cpf)
                 },
                 updateCity = { city ->
-                             viewModel.updateCity(city)
+                    viewModel.updateCity(city)
                 },
+//                updateImageUri = { imageUri ->
+//                    viewModel.updateImageUri(imageUri)
+//                },
                 updateUser = { user ->
                     viewModel.updateUser(user)
                 },

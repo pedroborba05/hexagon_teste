@@ -21,7 +21,7 @@ import com.example.hexagon_tecnico.presentation.users.components.UserImage
 @Composable
 @ExperimentalMaterialApi
 fun UsersInactiveCard(
-    user: User,
+    usersInactive: User,
     activeUsers: () -> Unit,
 ) {
     Card(
@@ -44,12 +44,12 @@ fun UsersInactiveCard(
         ) {
             Column {
                 UserImage(
-                    uri = user.imageUri, 80.dp, 80.dp
+                    uri = usersInactive.imageUri, 80.dp, 80.dp
                 )
                 TextTitle(
-                    userName = user.name
+                    userName = usersInactive.name
                 )
-                user.age?.let {
+                usersInactive.age?.let {
                     TextAuthor(
                         userAge = it
                     )
