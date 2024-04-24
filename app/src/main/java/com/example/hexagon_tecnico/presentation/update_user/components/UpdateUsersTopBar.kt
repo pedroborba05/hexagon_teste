@@ -7,7 +7,7 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ArrowBack
 import androidx.compose.runtime.Composable
-import com.example.hexagon_tecnico.core.Constants.Companion.UPDATE_USERS_SCREEN
+import com.example.hexagon_tecnico.core.Constants.Companion.TOPBAR_UPDATE_USERS_SCREEN
 
 @Composable
 fun UpdateUsersTopBar(
@@ -16,7 +16,7 @@ fun UpdateUsersTopBar(
     TopAppBar (
         title = {
             Text(
-                text = UPDATE_USERS_SCREEN
+                text = TOPBAR_UPDATE_USERS_SCREEN
             )
         },
         navigationIcon = {

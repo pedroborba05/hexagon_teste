@@ -8,6 +8,7 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.example.hexagon_tecnico.core.Constants.Companion.TOPBAR_INACTIVE_USERS_SCREEN
 
 @Composable
 fun InactiveUsersTopBar(
@@ -19,7 +20,7 @@ fun InactiveUsersTopBar(
                     .fillMaxSize()
                     .wrapContentSize(Alignment.Center)
             ) {
-                Text("Usuários inativos")
+                Text(TOPBAR_INACTIVE_USERS_SCREEN)
             }
         },
     )

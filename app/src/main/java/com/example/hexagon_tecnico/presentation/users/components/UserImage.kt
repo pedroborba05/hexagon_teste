@@ -22,8 +22,7 @@ fun UserImage(uri: Uri?, modifier: Modifier) {
         ImageRequest.Builder(context)
             .data(data = uri)
             .crossfade(true)
-            .placeholder(R.drawable.no_camera)
-            .error(R.drawable.no_camera)
+            .error(R.drawable.sem_imagem)
             .build()
     )
 

@@ -48,11 +48,11 @@ fun UsersCard(
             Column(
                 modifier = Modifier.weight(1f)
             ) {
-                TextTitle(
+                TextName(
                     userName = users.name,
                     style = MaterialTheme.typography.h6
                 )
-                TextAuthor(
+                TextAge(
                     userAge = users.age,
                     style = MaterialTheme.typography.body2
                 )

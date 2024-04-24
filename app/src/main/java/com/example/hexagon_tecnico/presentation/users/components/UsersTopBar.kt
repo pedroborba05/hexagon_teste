@@ -8,6 +8,7 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.example.hexagon_tecnico.core.Constants.Companion.TOPBAR_USERS_SCREEN
 
 @Composable
 fun UsersTopBar() {
@@ -18,7 +19,7 @@ fun UsersTopBar() {
                     .fillMaxSize()
                     .wrapContentSize(Alignment.Center)
             ) {
-                Text("Usuários")
+                Text(TOPBAR_USERS_SCREEN)
             }
         },
     )

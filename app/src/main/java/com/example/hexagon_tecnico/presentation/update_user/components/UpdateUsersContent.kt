@@ -30,11 +30,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.example.hexagon_tecnico.core.Constants.Companion.UPDATE_BUTTON
 import com.example.hexagon_tecnico.domain.model.User
-import formatCpf
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
-import java.util.TimeZone
+import com.example.hexagon_tecnico.util.Converters.Companion.formatCpf
+import com.example.hexagon_tecnico.util.Converters.Companion.toBrazilianDateFormat
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -87,7 +84,7 @@ fun UpdateUsersContent(
                     onClick = {
                         datePickerState
                             .selectedDateMillis?.let { millis ->
-                                updateAge (millis.toBrazilianDateFormatteste())
+                                updateAge (millis.toBrazilianDateFormat())
                             }
                         showDatePickerDialog = false
                     }) {
@@ -192,16 +189,4 @@ fun UpdateUsersContent(
             )
         }
     }
-}
-
-fun Long.toBrazilianDateFormatteste(
-    pattern: String = "dd/MM/yyyy"
-): String {
-    val date = Date(this)
-    val formatter = SimpleDateFormat(
-        pattern, Locale("pt-br")
-    ).apply {
-        timeZone = TimeZone.getTimeZone("GMT")
-    }
-    return formatter.format(date)
 }

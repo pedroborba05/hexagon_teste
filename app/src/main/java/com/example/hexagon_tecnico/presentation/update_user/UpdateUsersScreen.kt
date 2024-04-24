@@ -5,7 +5,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.hexagon_tecnico.presentation.update_user.components.UpdateUsersContent
-import com.example.hexagon_tecnico.presentation.update_user.components.UpdateUsersTopBar
 import com.example.hexagon_tecnico.presentation.users.UsersViewModel
 
 @Composable
@@ -18,11 +17,11 @@ fun UpdateUsersScreen(
         viewModel.getUser(userId)
     }
     Scaffold(
-        topBar = {
-            UpdateUsersTopBar(
-                navigateBack = navigateBack
-            )
-        },
+//        topBar = {
+//            UpdateUsersTopBar(
+//                navigateBack = navigateBack
+//            )
+//        },
         content = { padding ->
             UpdateUsersContent(
                 padding = padding,

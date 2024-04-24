@@ -6,17 +6,28 @@ import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
+import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
+import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -29,32 +40,29 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.OffsetMapping
-import androidx.compose.ui.text.input.TransformedText
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.hexagon_tecnico.domain.model.User
 import com.example.hexagon_tecnico.presentation.update_user.components.AddUsersTopBar
 import com.example.hexagon_tecnico.presentation.users.UsersViewModel
-import com.example.hexagon_tecnico.presentation.users.components.loadImageBitmap
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
-import java.util.TimeZone
+import com.example.hexagon_tecnico.ui.theme.BackgroundTextField
+import com.example.hexagon_tecnico.util.Converters.Companion.formatCpf
+import com.example.hexagon_tecnico.util.Converters.Companion.loadImageBitmap
+import com.example.hexagon_tecnico.util.Converters.Companion.toBrazilianDateFormat
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddUsersScreen(
-    viewModel: UsersViewModel = hiltViewModel(),
-    navigateBack: () -> Unit
+    viewModel: UsersViewModel = hiltViewModel()
 ) {
     var name by remember { mutableStateOf("") }
     var age by remember() { mutableStateOf("")}
@@ -110,30 +118,56 @@ fun AddUsersScreen(
     }
 
     Scaffold(
-        topBar = {
-            AddUsersTopBar(navigateBack = navigateBack)
-        }
+        topBar = { AddUsersTopBar() }
     ) { innerPadding ->
         Column(
             modifier = Modifier
                 .padding(innerPadding)
-                .fillMaxSize(),
+                .fillMaxSize()
+                .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.Top
         ) {
+            imageUri?.let { uri ->
+                LaunchedEffect(uri) {
+                    imageBitmap = loadImageBitmap(context, uri)
+                }
+                imageBitmap?.let { img ->
+                    Image(
+                        bitmap = img,
+                        contentDescription = "Imagem selecionada",
+                        modifier = Modifier
+                            .size(160.dp)
+                            .clip(CircleShape),
+                        contentScale = ContentScale.Crop
+                    )
+                }
+            }
+            Spacer(modifier = Modifier.height(12.dp))
             TextField(
                 value = name,
                 onValueChange = { name = it },
                 label = { Text("Nome") },
-                keyboardOptions = KeyboardOptions(
-                    capitalization = KeyboardCapitalization.Sentences,
-                )
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color.White),
+                colors = TextFieldDefaults.textFieldColors(
+                    backgroundColor = BackgroundTextField,
+                    textColor = Color.Black
+                ),
+                trailingIcon = {
+                    Icon(
+                        Icons.Default.Person, contentDescription = null,
+                        )
+                },
+                keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences)
             )
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(12.dp))
             TextField(
                 value = age,
                 onValueChange = { age = it },
                 Modifier
+                    .fillMaxWidth()
                     .onFocusChanged {
                         if (it.isFocused) {
                             showDatePickerDialog = true
@@ -143,49 +177,53 @@ fun AddUsersScreen(
                 label = {
                     Text("Data de Nascimento")
                 },
-                readOnly = true
+                colors = TextFieldDefaults.textFieldColors(
+                    backgroundColor = BackgroundTextField,
+                    textColor = Color.Black
+                ),
+                readOnly = true,
+                trailingIcon = {
+                    Icon(
+                        Icons.Default.DateRange, contentDescription = null,
+                        Modifier.clickable { showDatePickerDialog = true })
+                }
             )
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(12.dp))
             TextField(
                 value = cpf,
-                onValueChange = {
-                    if (it.length <= 11) {
-                        cpf = it
-                    }
-                },
+                onValueChange = { if (it.length <= 11) cpf = it },
                 label = { Text("CPF") },
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Number
+                colors = TextFieldDefaults.textFieldColors(
+                    backgroundColor = BackgroundTextField,
+                    textColor = Color.Black
                 ),
-                visualTransformation =  formatCpf()
-
+                modifier = Modifier.fillMaxWidth(),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                visualTransformation = formatCpf()
             )
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(12.dp))
             TextField(
                 value = city,
                 onValueChange = { city = it },
                 label = { Text("Cidade") },
-                keyboardOptions = KeyboardOptions(
-                    capitalization = KeyboardCapitalization.Sentences
-                )
-
+                colors = TextFieldDefaults.textFieldColors(
+                    backgroundColor = BackgroundTextField,
+                    textColor = Color.Black
+                ),
+                modifier = Modifier.fillMaxWidth(),
+                trailingIcon = {
+                    Icon(
+                        Icons.Default.LocationOn, contentDescription = null,
+                    )
+                },
+                keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences)
             )
+            Spacer(modifier = Modifier.height(12.dp))
             Button(onClick = {
                 requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
-            }) {
+            },
+            ) {
                 Text("Selecionar Imagem")
-            }
-            imageUri?.let { uri ->
-                LaunchedEffect(uri) {
-                    imageBitmap = loadImageBitmap(context, uri)
-                }
-                imageBitmap?.let { img ->
-                    Image(
-                        bitmap = img,
-                        contentDescription = "Imagem selecionada",
-                        modifier = Modifier.height(200.dp)
-                    )
-                }
             }
             Spacer(modifier = Modifier.height(16.dp))
             Button(
@@ -193,60 +231,11 @@ fun AddUsersScreen(
                     val user = User(0, name, age, cpf, city, imageUri, isActive = true)
                     viewModel.addUser(user)
                     Toast.makeText(context, "Usuário adicionado!", Toast.LENGTH_SHORT).show()
-
                     name = ""; age = ""; cpf = ""; city = ""; imageUri = null
-                }
+                },
             ) {
                 Text("Adicionar Usuário")
             }
         }
-    }
-}
-
-fun Long.toBrazilianDateFormat(
-    pattern: String = "dd/MM/yyyy"
-): String {
-    val date = Date(this)
-    val formatter = SimpleDateFormat(
-        pattern, Locale("pt-br")
-    ).apply {
-        timeZone = TimeZone.getTimeZone("GMT")
-    }
-    return formatter.format(date)
-}
-
-fun formatCpf(): VisualTransformation {
-    return VisualTransformation { text ->
-        val digits = text.filter { it.isDigit() }
-        var out = ""
-        for (i in digits.indices) {
-            when (i) {
-                3, 6 -> out += ".${digits[i]}"
-                9 -> out += "-${digits[i]}"
-                else -> out += digits[i]
-            }
-            if (i == 10) break
-        }
-
-        val formattedText = AnnotatedString(out)
-        val offsetMapping = object : OffsetMapping {
-            override fun originalToTransformed(offset: Int): Int {
-                if (offset <= 3) return offset
-                if (offset <= 6) return offset + 1
-                if (offset <= 9) return offset + 2
-                if (offset <= 11) return offset + 3
-                return 14
-            }
-
-            override fun transformedToOriginal(offset: Int): Int {
-                if (offset <= 3) return offset
-                if (offset <= 7) return offset - 1
-                if (offset <= 11) return offset - 2
-                if (offset <= 14) return offset - 3
-                return 11
-            }
-        }
-
-        TransformedText(formattedText, offsetMapping)
     }
 }

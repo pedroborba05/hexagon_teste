@@ -5,8 +5,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.hexagon_tecnico.data.dao.UserDao
 import com.example.hexagon_tecnico.domain.model.User
-import com.example.hexagon_tecnico.util.Converters
-import com.example.hexagon_tecnico.util.DateConverter
+import com.example.hexagon_tecnico.util.RoomConverter
 
 @Database(
     entities = [User::class],
@@ -14,7 +13,7 @@ import com.example.hexagon_tecnico.util.DateConverter
     exportSchema = false
 )
 @TypeConverters(
-    Converters::class
+    RoomConverter::class
 )
 abstract class UserDb : RoomDatabase() {
     abstract val userDao: UserDao

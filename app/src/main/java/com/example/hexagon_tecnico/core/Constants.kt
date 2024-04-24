@@ -30,5 +30,12 @@ class Constants {
         const val CPF = "Informe o seu CPF"
         const val CITY = "Informe a sua cidade"
         const val EMPTY_STRING = ""
+
+        //Topbars
+
+        const val TOPBAR_USERS_SCREEN = "Usuários"
+        const val TOPBAR_INACTIVE_USERS_SCREEN = "Usuários inativos"
+        const val TOPBAR_UPDATE_USERS_SCREEN = "Editar usuário"
+        const val TOPBAR_ADD_USERS_SCREEN = "Adicionar usuário"
     }
 }
