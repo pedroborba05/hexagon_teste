@@ -18,9 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.hexagon_tecnico.domain.model.User
 import com.example.hexagon_tecnico.util.Converters.Companion.calculateAge
-import java.time.LocalDate
-import java.time.Period
-import java.time.format.DateTimeFormatter
 
 
 @Composable

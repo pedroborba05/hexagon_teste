@@ -51,7 +51,9 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.hexagon_tecnico.core.Constants.Companion.ADD_USER
 import com.example.hexagon_tecnico.domain.model.User
+import com.example.hexagon_tecnico.presentation.add_user.components.RequestImagePermission
 import com.example.hexagon_tecnico.presentation.update_user.components.AddUsersTopBar
 import com.example.hexagon_tecnico.presentation.users.UsersViewModel
 import com.example.hexagon_tecnico.ui.theme.BackgroundTextField
@@ -85,16 +87,6 @@ fun AddUsersScreen(
             context.contentResolver.takePersistableUriPermission(uri, takeFlags)
 
             imageUri = uri
-        }
-    }
-
-    val requestPermissionLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.RequestPermission()
-    ) { isGranted: Boolean ->
-        if (isGranted) {
-            openDocument.launch(arrayOf("image/*"))
-        } else {
-            Toast.makeText(context, "Permissão recusada", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -219,22 +211,17 @@ fun AddUsersScreen(
                 keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences)
             )
             Spacer(modifier = Modifier.height(12.dp))
-            Button(onClick = {
-                requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
-            },
-            ) {
-                Text("Selecionar Imagem")
-            }
+            RequestImagePermission(openDocument)
             Spacer(modifier = Modifier.height(16.dp))
             Button(
                 onClick = {
                     val user = User(0, name, age, cpf, city, imageUri, isActive = true)
                     viewModel.addUser(user)
-                    Toast.makeText(context, "Usuário adicionado!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Usuário cadastrado com sucesso!", Toast.LENGTH_SHORT).show()
                     name = ""; age = ""; cpf = ""; city = ""; imageUri = null
                 },
             ) {
-                Text("Adicionar Usuário")
+                Text(ADD_USER)
             }
         }
     }

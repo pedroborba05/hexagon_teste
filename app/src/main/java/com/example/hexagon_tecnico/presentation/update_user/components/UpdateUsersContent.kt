@@ -1,16 +1,28 @@
 package com.example.hexagon_tecnico.presentation.update_user.components
 
+import android.net.Uri
+import android.widget.Toast
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
+import androidx.compose.material.Icon
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
+import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -23,6 +35,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -30,6 +43,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.example.hexagon_tecnico.core.Constants.Companion.UPDATE_BUTTON
 import com.example.hexagon_tecnico.domain.model.User
+import com.example.hexagon_tecnico.ui.theme.BackgroundTextField
 import com.example.hexagon_tecnico.util.Converters.Companion.formatCpf
 import com.example.hexagon_tecnico.util.Converters.Companion.toBrazilianDateFormat
 
@@ -43,7 +57,7 @@ fun UpdateUsersContent(
     updateAge: (age: String) -> Unit,
     updateCpf: (cpf: String) -> Unit,
     updateCity: (city: String) -> Unit,
-//    updateImageUri: (imageUri: Uri?) -> Unit,
+    updateImageUri: (imageUri: Uri?) -> Unit,
     updateUser: (user: User) -> Unit,
     navigateBack: () -> Unit
 ) {
@@ -54,27 +68,6 @@ fun UpdateUsersContent(
     val focusManager = LocalFocusManager.current
 
     val context = LocalContext.current
-
-//    val openDocument = rememberLauncherForActivityResult(
-//        contract = ActivityResultContracts.OpenDocument()
-//    ) { uri: Uri? ->
-//        uri?.let {
-//            val takeFlags: Int = Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
-//            context.contentResolver.takePersistableUriPermission(uri, takeFlags)
-//
-//            updateImageUri = uri
-//        }
-//    }
-//
-//    val requestPermissionLauncher = rememberLauncherForActivityResult(
-//        contract = ActivityResultContracts.RequestPermission()
-//    ) { isGranted: Boolean ->
-//        if (isGranted) {
-//            openDocument.launch(arrayOf("image/*"))
-//        } else {
-//            Toast.makeText(context, "Permissão recusada", Toast.LENGTH_SHORT).show()
-//        }
-//    }
 
     if (showDatePickerDialog) {
         DatePickerDialog(
@@ -108,6 +101,17 @@ fun UpdateUsersContent(
                 updateName(name)
             },
             label = { Text("Nome") },
+            modifier = Modifier
+                .background(Color.White),
+            colors = TextFieldDefaults.textFieldColors(
+                backgroundColor = BackgroundTextField,
+                textColor = Color.Black
+            ),
+            trailingIcon = {
+                Icon(
+                    Icons.Default.Person, contentDescription = null,
+                )
+            },
             keyboardOptions = KeyboardOptions(
                 capitalization = KeyboardCapitalization.Sentences
             )
@@ -126,7 +130,16 @@ fun UpdateUsersContent(
                     }
                 },
             label = { Text("Data de nascimento") },
-            readOnly = true
+            colors = TextFieldDefaults.textFieldColors(
+                backgroundColor = BackgroundTextField,
+                textColor = Color.Black
+            ),
+            readOnly = true,
+            trailingIcon = {
+                Icon(
+                    Icons.Default.DateRange, contentDescription = null,
+                    Modifier.clickable { showDatePickerDialog = true })
+            },
         )
         Spacer(
             modifier = Modifier.height(12.dp)
@@ -137,6 +150,10 @@ fun UpdateUsersContent(
                 updateCpf(cpf)
             },
             label = { Text("CPF") },
+            colors = TextFieldDefaults.textFieldColors(
+                backgroundColor = BackgroundTextField,
+                textColor = Color.Black
+            ),
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Number
             ),
@@ -151,6 +168,15 @@ fun UpdateUsersContent(
                 updateCity(city)
             },
             label = { Text("Cidade") },
+            colors = TextFieldDefaults.textFieldColors(
+                backgroundColor = BackgroundTextField,
+                textColor = Color.Black
+            ),
+            trailingIcon = {
+                Icon(
+                    Icons.Default.LocationOn, contentDescription = null,
+                )
+            },
             keyboardOptions = KeyboardOptions(
                 capitalization = KeyboardCapitalization.Sentences
             )
@@ -158,30 +184,11 @@ fun UpdateUsersContent(
         Spacer(
             modifier = Modifier.height(12.dp)
         )
-//        Button(onClick = {
-//            requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
-//        }) {
-//            Text("Selecionar Imagem")
-//        }
-//        imageUri?.let { uri ->
-//            LaunchedEffect(uri) {
-//                imageBitmap = loadImageBitmap(context, uri)
-//            }
-//            imageBitmap?.let { img ->
-//                Image(
-//                    bitmap = img,
-//                    contentDescription = "Imagem selecionada",
-//                    modifier = Modifier.height(200.dp)
-//                )
-//            }
-//        }
-        Spacer(
-            modifier = Modifier.height(12.dp)
-        )
         Button(
             onClick = {
                 updateUser(user)
                 navigateBack()
+                Toast.makeText(context, "Usuário editado com sucesso!", Toast.LENGTH_SHORT).show()
             }
         ) {
             Text(

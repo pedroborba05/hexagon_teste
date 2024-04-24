@@ -22,7 +22,7 @@ class Constants {
         //Buttons
         const val ADD_BUTTON = "Adicionar"
         const val DISMISS_BUTTON = "Voltar"
-        const val UPDATE_BUTTON = "Atualizar"
+        const val UPDATE_BUTTON = "Editar"
 
         //Placeholders
         const val USER_NAME = "Informe o seu nome"
@@ -32,7 +32,6 @@ class Constants {
         const val EMPTY_STRING = ""
 
         //Topbars
-
         const val TOPBAR_USERS_SCREEN = "Usuários"
         const val TOPBAR_INACTIVE_USERS_SCREEN = "Usuários inativos"
         const val TOPBAR_UPDATE_USERS_SCREEN = "Editar usuário"
