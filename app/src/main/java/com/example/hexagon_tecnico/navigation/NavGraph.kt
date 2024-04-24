@@ -3,12 +3,13 @@ package com.example.hexagon_tecnico.navigation
 import AddUsersScreen
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType.Companion.IntType
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.example.hexagon_tecnico.core.Constants.Companion.USER_ID
+import com.example.hexagon_tecnico.core.Constants
 import com.example.hexagon_tecnico.navigation.Screen.AddUsersScreen
 import com.example.hexagon_tecnico.navigation.Screen.InactivateUsersScreen
 import com.example.hexagon_tecnico.navigation.Screen.UpdateUsersScreen
@@ -18,14 +19,13 @@ import com.example.hexagon_tecnico.presentation.update_user.UpdateUsersScreen
 import com.example.hexagon_tecnico.presentation.users.UsersScreen
 
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
-@ExperimentalMaterialApi
-fun NavGraph (
-    navController: NavHostController
-) {
+fun NavGraph(navController: NavHostController, modifier: Modifier = Modifier) {
     NavHost(
         navController = navController,
         startDestination = UsersScreen.route,
+        modifier = modifier
     ) {
         composable(
             route = UsersScreen.route
@@ -34,13 +34,7 @@ fun NavGraph (
                 navigateToUpdateUserScreen = { userId ->
                     navController.navigate(
                         route = "${UpdateUsersScreen.route}/${userId}"
-                    ) },
-                navigateToInactiveUsersScreen = {
-                    navController.navigate(InactivateUsersScreen.route)
-                },
-                navigateToAddUsersScreen = {
-                    navController.navigate(AddUsersScreen.route)
-                }
+                    ) }
             )
         }
         composable(
@@ -55,21 +49,17 @@ fun NavGraph (
         composable(
             route = AddUsersScreen.route
         ) {
-            AddUsersScreen(
-                navigateBack = {
-                    navController.popBackStack()
-                }
-            )
+            AddUsersScreen()
         }
         composable(
-            route = "${UpdateUsersScreen.route}/{$USER_ID}",
+            route = "${UpdateUsersScreen.route}/{${Constants.USER_ID}}",
             arguments = listOf(
-                navArgument(USER_ID) {
-                    type = IntType
+                navArgument(Constants.USER_ID) {
+                    type = NavType.IntType
                 }
             )
         ) { backStackEntry ->
-            val userId = backStackEntry.arguments?.getInt(USER_ID) ?: 0
+            val userId = backStackEntry.arguments?.getInt(Constants.USER_ID) ?: 0
             UpdateUsersScreen(
                 userId = userId,
                 navigateBack = {
