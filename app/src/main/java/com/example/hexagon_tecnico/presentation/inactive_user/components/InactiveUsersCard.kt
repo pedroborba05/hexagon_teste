@@ -5,6 +5,9 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
@@ -26,41 +29,38 @@ fun UsersInactiveCard(
     activeUsers: () -> Unit,
 ) {
     Card(
-        shape = MaterialTheme.shapes.small,
+        shape = RoundedCornerShape(12.dp),
         modifier = Modifier
-            .padding(
-                start = 8.dp,
-                end = 8.dp,
-                top = 4.dp,
-                bottom = 4.dp
-            )
+            .padding(all = 8.dp)
             .fillMaxWidth(),
-        elevation = 3.dp,
+        elevation = 6.dp,
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(12.dp),
+                .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Column {
-                UserImage(
-                    uri = usersInactive.imageUri,
-                    Modifier
-                )
+            UserImage(
+                uri = usersInactive.imageUri,
+                Modifier.size(80.dp)
+            )
+            Spacer(modifier = Modifier.width(16.dp))
+            Column (
+                modifier = Modifier.weight(1f)
+            ) {
                 TextName(
-                    userName = usersInactive.name
+                    userName = usersInactive.name,
+                    style = MaterialTheme.typography.h6
                 )
-                usersInactive.age?.let {
+                usersInactive.age.let {
                     val userAge = calculateAge(usersInactive.age)
                     TextAge(
-                        userAge = userAge
+                        userAge = userAge,
+                        style = MaterialTheme.typography.body2
                     )
                 }
             }
-            Spacer(
-                modifier = Modifier.weight(1f)
-            )
             ActiveUsersIcon(
                 activeUsers = activeUsers
             )
