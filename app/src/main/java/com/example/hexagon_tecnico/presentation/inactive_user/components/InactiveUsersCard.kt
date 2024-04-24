@@ -16,6 +16,7 @@ import com.example.hexagon_tecnico.domain.model.User
 import com.example.hexagon_tecnico.presentation.users.components.TextAge
 import com.example.hexagon_tecnico.presentation.users.components.TextName
 import com.example.hexagon_tecnico.presentation.users.components.UserImage
+import com.example.hexagon_tecnico.util.Converters.Companion.calculateAge
 
 
 @Composable
@@ -51,8 +52,9 @@ fun UsersInactiveCard(
                     userName = usersInactive.name
                 )
                 usersInactive.age?.let {
+                    val userAge = calculateAge(usersInactive.age)
                     TextAge(
-                        userAge = it
+                        userAge = userAge
                     )
                 }
             }

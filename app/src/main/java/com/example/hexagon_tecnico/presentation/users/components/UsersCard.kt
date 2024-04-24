@@ -17,6 +17,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.hexagon_tecnico.domain.model.User
+import com.example.hexagon_tecnico.util.Converters.Companion.calculateAge
+import java.time.LocalDate
+import java.time.Period
+import java.time.format.DateTimeFormatter
 
 
 @Composable
@@ -52,8 +56,9 @@ fun UsersCard(
                     userName = users.name,
                     style = MaterialTheme.typography.h6
                 )
+                val userAge = calculateAge(users.age)
                 TextAge(
-                    userAge = users.age,
+                    userAge = userAge,
                     style = MaterialTheme.typography.body2
                 )
             }

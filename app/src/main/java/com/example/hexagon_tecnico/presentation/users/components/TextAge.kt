@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun TextAge(
-    userAge: String, style: TextStyle = MaterialTheme.typography.body1
+    userAge: Int, style: TextStyle = MaterialTheme.typography.body1
 ) {
     Text(
         text = "Idade: $userAge",

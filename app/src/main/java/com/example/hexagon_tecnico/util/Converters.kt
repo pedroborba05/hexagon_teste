@@ -12,6 +12,9 @@ import androidx.compose.ui.text.input.VisualTransformation
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.Period
+import java.time.format.DateTimeFormatter
 import java.util.Date
 import java.util.Locale
 import java.util.TimeZone
@@ -74,6 +77,13 @@ class Converters {
                     bitmap?.asImageBitmap()
                 }
             }
+        }
+
+        fun calculateAge(birthDateString: String): Int {
+            val dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+            val birthDate = LocalDate.parse(birthDateString, dateFormatter)
+            val today = LocalDate.now()
+            return Period.between(birthDate, today).years
         }
     }
 }
