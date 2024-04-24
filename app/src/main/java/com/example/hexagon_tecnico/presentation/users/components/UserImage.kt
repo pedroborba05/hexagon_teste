@@ -3,33 +3,36 @@ package com.example.hexagon_tecnico.presentation.users.components
 import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.example.hexagon_tecnico.R
 
 @Composable
-fun UserImage(uri: Uri?, width: Dp, height: Dp) {
-    val imagePainter = // Adiciona um efeito de transição suave ao carregar a imagem
-        rememberAsyncImagePainter(
-            ImageRequest.Builder // Define uma imagem de placeholder
-            // Define uma imagem para exibir em caso de erro
-                (LocalContext.current).data(data = uri)
-                .apply<ImageRequest.Builder>(block = fun ImageRequest.Builder.() {
-                    crossfade(true) // Adiciona um efeito de transição suave ao carregar a imagem
-                    placeholder(R.drawable.no_camera) // Define uma imagem de placeholder
-                    error(R.drawable.ic_launcher_background) // Define uma imagem para exibir em caso de erro
-                }).build()
-        )
+fun UserImage(uri: Uri?, modifier: Modifier) {
+    val context = LocalContext.current
+    val imagePainter: Painter = rememberAsyncImagePainter(
+        ImageRequest.Builder(context)
+            .data(data = uri)
+            .crossfade(true)
+            .placeholder(R.drawable.no_camera)
+            .error(R.drawable.no_camera)
+            .build()
+    )
 
     Image(
         painter = imagePainter,
         contentDescription = "User Image",
-        modifier = Modifier.size(width = width, height = height), // Modifique conforme necessário
-        contentScale = ContentScale.Crop // Mantém a proporção da imagem
+        modifier = modifier
+            .size(50.dp)
+            .clip(CircleShape),
+        contentScale = ContentScale.Crop
     )
 }

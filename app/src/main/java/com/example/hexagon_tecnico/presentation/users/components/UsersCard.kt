@@ -1,10 +1,14 @@
 package com.example.hexagon_tecnico.presentation.users.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
@@ -23,40 +27,36 @@ fun UsersCard(
     navigateToUpdateUserScreen: (userId: Int) -> Unit
 ) {
     Card(
-        shape = MaterialTheme.shapes.small,
+        shape = RoundedCornerShape(12.dp),
         modifier = Modifier
-            .padding(
-                start = 8.dp,
-                end = 8.dp,
-                top = 4.dp,
-                bottom = 4.dp
-            )
-            .fillMaxWidth(),
-        elevation = 3.dp,
-        onClick = {
-            navigateToUpdateUserScreen(users.id)
-        }
+            .padding(all = 8.dp)
+            .fillMaxWidth()
+            .clickable(onClick = { navigateToUpdateUserScreen(users.id) }),
+        elevation = 6.dp
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(12.dp),
+                .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Column {
-                UserImage(
-                    uri = users.imageUri, 80.dp, 80.dp
-                )
+            UserImage(
+                uri = users.imageUri,
+                Modifier.size(80.dp)
+            )
+            Spacer(modifier = Modifier.width(16.dp))
+            Column(
+                modifier = Modifier.weight(1f)
+            ) {
                 TextTitle(
-                    userName = users.name
+                    userName = users.name,
+                    style = MaterialTheme.typography.h6
                 )
                 TextAuthor(
-                    userAge = users.age
+                    userAge = users.age,
+                    style = MaterialTheme.typography.body2
                 )
             }
-            Spacer(
-                modifier = Modifier.weight(1f)
-            )
             DeleteIcon(
                 inactiveUser = inactiveUser
             )

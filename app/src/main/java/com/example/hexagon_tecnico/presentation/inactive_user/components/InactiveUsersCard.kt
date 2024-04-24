@@ -44,7 +44,8 @@ fun UsersInactiveCard(
         ) {
             Column {
                 UserImage(
-                    uri = usersInactive.imageUri, 80.dp, 80.dp
+                    uri = usersInactive.imageUri,
+                    Modifier
                 )
                 TextTitle(
                     userName = usersInactive.name
