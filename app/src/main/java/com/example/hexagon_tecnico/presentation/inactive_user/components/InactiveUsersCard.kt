@@ -13,8 +13,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.hexagon_tecnico.domain.model.User
-import com.example.hexagon_tecnico.presentation.users.components.TextAuthor
-import com.example.hexagon_tecnico.presentation.users.components.TextTitle
+import com.example.hexagon_tecnico.presentation.users.components.TextAge
+import com.example.hexagon_tecnico.presentation.users.components.TextName
 import com.example.hexagon_tecnico.presentation.users.components.UserImage
 
 
@@ -47,11 +47,11 @@ fun UsersInactiveCard(
                     uri = usersInactive.imageUri,
                     Modifier
                 )
-                TextTitle(
+                TextName(
                     userName = usersInactive.name
                 )
                 usersInactive.age?.let {
-                    TextAuthor(
+                    TextAge(
                         userAge = it
                     )
                 }
