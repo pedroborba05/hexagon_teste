@@ -13,17 +13,14 @@ import com.example.hexagon_tecnico.presentation.users.UsersViewModel
 @Composable
 @ExperimentalMaterialApi
 fun InactiveUsersScreen(
-    viewModel: UsersViewModel = hiltViewModel(),
-    navigateBack: () -> Unit
+    viewModel: UsersViewModel = hiltViewModel()
     ) {
 
     val usersInactive by viewModel.inactiveUsers.collectAsState(initial = emptyList())
 
     Scaffold(
         topBar = {
-            InactiveUsersTopBar(
-                navigateBack = navigateBack
-            )
+            InactiveUsersTopBar()
         },
         content = { padding ->
             UsersInactiveContent(

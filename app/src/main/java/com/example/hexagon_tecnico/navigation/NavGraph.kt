@@ -40,11 +40,7 @@ fun NavGraph(navController: NavHostController, modifier: Modifier = Modifier) {
         composable(
             route = InactivateUsersScreen.route
         ) {
-            InactiveUsersScreen(
-                navigateBack = {
-                    navController.popBackStack()
-                }
-            )
+            InactiveUsersScreen()
         }
         composable(
             route = AddUsersScreen.route

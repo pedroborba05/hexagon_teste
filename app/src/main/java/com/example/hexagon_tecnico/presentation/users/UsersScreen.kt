@@ -1,15 +1,12 @@
 package com.example.hexagon_tecnico.presentation.users
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material.Button
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.hexagon_tecnico.presentation.users.components.AddUsersFloatingActionButton
 import com.example.hexagon_tecnico.presentation.users.components.UsersContent
 import com.example.hexagon_tecnico.presentation.users.components.UsersTopBar
 
@@ -18,9 +15,7 @@ import com.example.hexagon_tecnico.presentation.users.components.UsersTopBar
 @ExperimentalMaterialApi
 fun UsersScreen(
     viewModel: UsersViewModel = hiltViewModel(),
-    navigateToUpdateUserScreen: (userId: Int) -> Unit,
-    navigateToInactiveUsersScreen: () -> Unit,
-    navigateToAddUsersScreen: () -> Unit
+    navigateToUpdateUserScreen: (userId: Int) -> Unit
 ) {
     val users by viewModel.activeUsers.collectAsState(initial = emptyList())
 
@@ -30,11 +25,6 @@ fun UsersScreen(
         },
         content = { padding ->
             Column {
-                Button(
-                    onClick = navigateToInactiveUsersScreen
-                ) {
-                    Text("Usuários inativos")
-                }
                 UsersContent(
                     padding = padding,
                     users = users,
@@ -44,13 +34,6 @@ fun UsersScreen(
                     navigateToUpdateUserScreen = navigateToUpdateUserScreen
                 )
             }
-        },
-        floatingActionButton = {
-            AddUsersFloatingActionButton(
-                openDialog = {
-                    navigateToAddUsersScreen()
-                }
-            )
         }
     )
 }
