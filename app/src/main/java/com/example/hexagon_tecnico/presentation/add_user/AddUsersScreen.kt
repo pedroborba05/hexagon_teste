@@ -1,5 +1,4 @@
 
-import android.Manifest
 import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
@@ -19,7 +18,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
@@ -58,6 +59,8 @@ import com.example.hexagon_tecnico.presentation.update_user.components.AddUsersT
 import com.example.hexagon_tecnico.presentation.users.UsersViewModel
 import com.example.hexagon_tecnico.ui.theme.BackgroundTextField
 import com.example.hexagon_tecnico.util.Converters.Companion.formatCpf
+import com.example.hexagon_tecnico.util.Converters.Companion.isFormValid
+import com.example.hexagon_tecnico.util.Converters.Companion.isValidCPF
 import com.example.hexagon_tecnico.util.Converters.Companion.loadImageBitmap
 import com.example.hexagon_tecnico.util.Converters.Companion.toBrazilianDateFormat
 
@@ -67,7 +70,7 @@ fun AddUsersScreen(
     viewModel: UsersViewModel = hiltViewModel()
 ) {
     var name by remember { mutableStateOf("") }
-    var age by remember() { mutableStateOf("")}
+    var age by remember { mutableStateOf("")}
     var cpf by remember { mutableStateOf("") }
     var city by remember { mutableStateOf("") }
     var imageUri by remember { mutableStateOf<Uri?>(null) }
@@ -215,14 +218,21 @@ fun AddUsersScreen(
             Spacer(modifier = Modifier.height(16.dp))
             Button(
                 onClick = {
-                    val user = User(0, name, age, cpf, city, imageUri, isActive = true)
-                    viewModel.addUser(user)
-                    Toast.makeText(context, "Usuário cadastrado com sucesso!", Toast.LENGTH_SHORT).show()
-                    name = ""; age = ""; cpf = ""; city = ""; imageUri = null
+                    if (isFormValid(name, age, cpf, city, imageUri)) {
+                        val user = User(0, name, age, cpf, city, imageUri, isActive = true)
+                        viewModel.addUser(user)
+                        Toast.makeText(context, "Usuário cadastrado com sucesso!", Toast.LENGTH_SHORT).show()
+                        name = ""; age = ""; cpf = ""; city = ""; imageUri = null
+                    }
                 },
+                enabled = isFormValid(name, age, cpf, city, imageUri),
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = if (isFormValid(name, age, cpf, city, imageUri)) MaterialTheme.colors.primary else Color.Gray
+                )
             ) {
-                Text(ADD_USER)
+                Text("Cadastrar Usuário")
             }
+
         }
     }
 }

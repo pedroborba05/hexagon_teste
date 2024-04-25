@@ -15,14 +15,14 @@ class Constants {
         const val USER_ID = "userId"
 
         //Actions
-        const val ADD_USER = "Adicionar usuário"
+        const val ADD_USER = "Cadastrar usuário"
         const val INACTIVE_USER = "Inativar usuário"
         const val ACTIVE_USER = "Ativar usuário"
 
         //Buttons
         const val ADD_BUTTON = "Adicionar"
         const val DISMISS_BUTTON = "Voltar"
-        const val UPDATE_BUTTON = "Editar"
+        const val UPDATE_BUTTON = "Salvar"
 
         //Placeholders
         const val USER_NAME = "Informe o seu nome"

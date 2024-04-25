@@ -13,6 +13,6 @@ data class User(
     val age: String,
     val cpf: String,
     val city: String,
-    val imageUri: Uri?,
+    var imageUri: Uri?,
     val isActive: Boolean
 )

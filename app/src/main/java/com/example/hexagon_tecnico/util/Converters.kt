@@ -79,11 +79,16 @@ class Converters {
             }
         }
 
-        fun calculateAge(birthDateString: String): Int {
+        fun calculateAge(age: String): Int {
             val dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
-            val birthDate = LocalDate.parse(birthDateString, dateFormatter)
+            val birthDate = LocalDate.parse(age, dateFormatter)
             val today = LocalDate.now()
             return Period.between(birthDate, today).years
         }
+
+        fun isFormValid(name: String, age: String, cpf: String, city: String, imageUri: Uri?): Boolean {
+            return name.isNotEmpty() && age.isNotEmpty() && cpf.isNotEmpty() && city.isNotEmpty() && imageUri != null
+        }
+
     }
 }

@@ -1,4 +1,4 @@
-package com.example.hexagon_tecnico.presentation.add_user.components
+package com.example.hexagon_tecnico.presentation.update_user.components
 
 import android.Manifest
 import android.os.Build
@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import com.example.hexagon_tecnico.R
 
 @Composable
-fun RequestImagePermission(openDocument: ActivityResultLauncher<Array<String>>) {
+fun RequestToUpdateImagePermission(openDocument: ActivityResultLauncher<Array<String>>) {
     val context = LocalContext.current
     val requestPermissionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestPermission()
