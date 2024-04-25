@@ -27,7 +27,7 @@
   
 Teste técnico da empresa Hexagon mining, utilizando a linguagem Kotlin em conjunto do Jetpack Compose seguindo a arquitetura MVVM.
 
-Este aplicativo inicia na tela de lista de usuários ativos. Nesta tela, realizamos uma consulta ao nosso banco de dados Room, utilizando o Flow para monitorar mudanças em tempo real, como a inativação de usuários, que são então exibidos na tela de usuários inativos.
+Este aplicativo inicia na tela de lista de usuários ativos. Nesta tela, é realizado uma consulta ao nosso banco de dados Room, utilizando o Flow para monitorar mudanças em tempo real, como a inativação de usuários, que são então exibidos na tela de usuários inativos.
 
 Na tela inicial, ao selecionar um usuário, um sistema de navegação é acionado para direcionar ao formulário de edição de informações. Nessa tela, é possível editar todos os dados do usuário, incluindo nome, data de nascimento, CPF, cidade e imagem.
 
@@ -48,7 +48,7 @@ MVVM (Model-View-ViewModel) padrão de arquitetura foi usado no desenvolvimento 
 
 ## Bibliotecas
  
-No desenvolvimento deste aplicativo, optei pelo uso do Room para gerenciar o banco de dados local porque precisava de uma solução robusta e bem integrada ao ecossistema Android para persistência de dados. O Room simplifica o trabalho com o SQLite, proporcionando uma camada de abstração que permite a criação e consulta de dados de maneira mais fluída e segura.
+No desenvolvimento deste aplicativo, optei pelo uso do Room para gerenciar o banco de dados local para persistência de dados. O Room simplifica o trabalho com o SQLite, permite a criação e consulta de dados de maneira mais fluída e segura.
 
 Para a listagem de usuários ativos e inativos, escolhi utilizar o Flow do Kotlin Coroutines. Isso muito importante para implementar atualizações em tempo real na interface do usuário, refletindo mudanças imediatas no banco de dados, como ativação ou inativação de usuários, sem necessidade de recarregar os dados manualmente.
 
