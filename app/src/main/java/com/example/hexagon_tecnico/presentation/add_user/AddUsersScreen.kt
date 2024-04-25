@@ -52,7 +52,6 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.hexagon_tecnico.core.Constants.Companion.ADD_USER
 import com.example.hexagon_tecnico.domain.model.User
 import com.example.hexagon_tecnico.presentation.add_user.components.RequestImagePermission
 import com.example.hexagon_tecnico.presentation.update_user.components.AddUsersTopBar
@@ -60,7 +59,6 @@ import com.example.hexagon_tecnico.presentation.users.UsersViewModel
 import com.example.hexagon_tecnico.ui.theme.BackgroundTextField
 import com.example.hexagon_tecnico.util.Converters.Companion.formatCpf
 import com.example.hexagon_tecnico.util.Converters.Companion.isFormValid
-import com.example.hexagon_tecnico.util.Converters.Companion.isValidCPF
 import com.example.hexagon_tecnico.util.Converters.Companion.loadImageBitmap
 import com.example.hexagon_tecnico.util.Converters.Companion.toBrazilianDateFormat
 
@@ -218,16 +216,16 @@ fun AddUsersScreen(
             Spacer(modifier = Modifier.height(16.dp))
             Button(
                 onClick = {
-                    if (isFormValid(name, age, cpf, city, imageUri)) {
+                    if (isFormValid(name, age)) {
                         val user = User(0, name, age, cpf, city, imageUri, isActive = true)
                         viewModel.addUser(user)
                         Toast.makeText(context, "Usuário cadastrado com sucesso!", Toast.LENGTH_SHORT).show()
                         name = ""; age = ""; cpf = ""; city = ""; imageUri = null
                     }
                 },
-                enabled = isFormValid(name, age, cpf, city, imageUri),
+                enabled = isFormValid(name, age),
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor = if (isFormValid(name, age, cpf, city, imageUri)) MaterialTheme.colors.primary else Color.Gray
+                    backgroundColor = if (isFormValid(name, age)) MaterialTheme.colors.primary else Color.Gray
                 )
             ) {
                 Text("Cadastrar Usuário")

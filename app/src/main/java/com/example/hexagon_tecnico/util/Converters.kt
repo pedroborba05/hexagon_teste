@@ -86,8 +86,8 @@ class Converters {
             return Period.between(birthDate, today).years
         }
 
-        fun isFormValid(name: String, age: String, cpf: String, city: String, imageUri: Uri?): Boolean {
-            return name.isNotEmpty() && age.isNotEmpty() && cpf.isNotEmpty() && city.isNotEmpty() && imageUri != null
+        fun isFormValid(name: String, age: String): Boolean {
+            return name.isNotEmpty() && age.isNotEmpty()
         }
 
     }
