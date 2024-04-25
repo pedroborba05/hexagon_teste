@@ -27,6 +27,16 @@
   
 Teste técnico da empresa Hexagon mining, utilizando a linguagem Kotlin em conjunto do Jetpack Compose seguindo a arquitetura MVVM.
 
+Este aplicativo inicia na tela de lista de usuários ativos. Nesta tela, realizamos uma consulta ao nosso banco de dados Room, utilizando o Flow para monitorar mudanças em tempo real, como a inativação de usuários, que são então exibidos na tela de usuários inativos.
+
+Na tela inicial, ao selecionar um usuário, um sistema de navegação é acionado para direcionar ao formulário de edição de informações. Nessa tela, é possível editar todos os dados do usuário, incluindo nome, data de nascimento, CPF, cidade e imagem.
+
+É possível também inativar qualquer usuário listado na tela inicial. Uma vez inativado, o usuário é automaticamente transferido para a tela de usuários inativos, processo controlado pela propriedade isActive na tabela de usuários.
+
+A tela de usuários inativos exibe todos os usuários que foram inativados, permitindo reativá-los individualmente através de uma interação com o ícone correspondente. Para garantir uma interação clara, utilizamos um Dialog que solicita confirmação antes de reativar um usuário específico.
+
+Na tela de adicionar usuários, os campos disponíveis permitem definir um novo cadastro como ativo no sistema. Todos esses dados são armazenados localmente no banco de dados do aplicativo.
+
   ## Arquitetura
 MVVM (Model-View-ViewModel) padrão de arquitetura foi usado no desenvolvimento deste aplicativo.
 
