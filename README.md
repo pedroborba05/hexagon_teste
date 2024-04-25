@@ -9,10 +9,9 @@
 
   
 <p align="center">
- <img src="docs/gif/screen1.gif" width="25%"/>
-  <img src="docs/gif/screen2.gif" width="25%"/>
-  <img src="docs/gif/screen3.gif" width="25%"/>
-  <img src="docs/gif/screen4.gif" width="25%"/>
+ <img src="docs/screen1.gif" width="25%"/>
+  <img src="docs/screen2.gif" width="25%"/>
+  <img src="docs/screen3.gif" width="25%"/>
 
 </p>
   
@@ -41,20 +40,19 @@ MVVM (Model-View-ViewModel) padrão de arquitetura foi usado no desenvolvimento 
  
 No desenvolvimento deste aplicativo, optei pelo uso do Room para gerenciar o banco de dados local porque precisava de uma solução robusta e bem integrada ao ecossistema Android para persistência de dados. O Room simplifica o trabalho com o SQLite, proporcionando uma camada de abstração que permite a criação e consulta de dados de maneira mais fluída e segura.
 
-Para a listagem de usuários ativos e inativos, escolhi utilizar o Flow do Kotlin Coroutines. Isso foi crucial para implementar atualizações em tempo real na interface do usuário, refletindo mudanças imediatas no banco de dados, como ativação ou inativação de usuários, sem necessidade de recarregar os dados manualmente.
+Para a listagem de usuários ativos e inativos, escolhi utilizar o Flow do Kotlin Coroutines. Isso muito importante para implementar atualizações em tempo real na interface do usuário, refletindo mudanças imediatas no banco de dados, como ativação ou inativação de usuários, sem necessidade de recarregar os dados manualmente.
 
-A biblioteca Coil-Compose foi selecionada para o manejo de imagens, desde o upload de uma nova foto na tela de cadastro e edição até a exibição nas listas de usuários. Coil oferece uma integração perfeita com o Jetpack Compose, permitindo carregamentos eficientes e cache de imagens, melhorando a performance e a experiência do usuário.
+A biblioteca Coil-Compose foi selecionada para o manejo de imagens, desde o upload de uma nova foto na tela de cadastro e edição até a exibição nas listas de usuários.
 
-Utilizei o Hilt para a injeção de dependência devido à sua integração profunda com o ecossistema Android e o Jetpack, facilitando a gestão de dependências e a escalabilidade do projeto. O Hilt reduz a complexidade do código manual para injeção de dependências e garante uma maior consistência e segurança na construção de componentes do aplicativo.
+Utilizei o Hilt para a injeção de dependência, facilitando a gestão de dependências e a escalabilidade do projeto. O Hilt reduz a complexidade do código manual para injeção de dependências e garante uma maior consistência e segurança na construção de componentes do aplicativo.
 
 A navegação no aplicativo foi implementada com o Navigation Compose, que permite uma gestão fluída e fácil das transições entre telas. A adição de uma bottom navigation contribuiu para uma experiência de usuário mais intuitiva e acessível, especialmente porque o aplicativo possui poucas telas, tornando a navegação direta e agradável.
 
-Para gerenciamento do estado e comunicação entre componentes, utilizei as bibliotecas androidx.lifecycle:lifecycle-livedata-ktx e runtime-livedata. Essas ferramentas me permitiram manter os dados dos usuários atualizados e reativos às interações, garantindo que a UI sempre refletisse o estado mais atual do sistema.
+Para gerenciamento do estado e comunicação entre componentes, utilizei a biblioteca lifecycle. Essas ferramentas me permitiram manter os dados dos usuários atualizados e reativos às interações, garantindo que a UI sempre refletisse o estado mais atual do sistema.
 
-No design dos componentes, decidi utilizar tanto o Material Design 2 quanto o Material Design 3 para aproveitar os melhores elementos de cada versão, criando uma interface moderna, coesa e adaptável a diferentes dispositivos Android.
+No design dos componentes, decidi utilizar tanto o Material Design 2 quanto o Material Design 3 para aproveitar os melhores elementos de cada versão, criando uma interface mais moderna e adaptável a diferentes dispositivos Android.
     
-- Others
 - [Flow](https://developer.android.com/kotlin/flow) - Os fluxos são criados com base em corrotinas e podem fornecer vários valores.
-- [Coroutines](https://github.com/Kotlin/kotlinx.coroutines) - Suporte de biblioteca para corrotinas, fornece construtor de corrotinas runBlocking usado em testes.
+- [Coroutines](https://github.com/Kotlin/kotlinx.coroutines) - Suporte de biblioteca para corrotinas
   
 </br>
