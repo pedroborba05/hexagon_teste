@@ -17,7 +17,7 @@ import dagger.hilt.components.SingletonComponent
 @InstallIn(SingletonComponent::class)
 class AppModule {
     @Provides
-    fun provideBookDb(
+    fun provideUserDb(
         @ApplicationContext
         context: Context
     ) = Room.databaseBuilder(
@@ -27,12 +27,12 @@ class AppModule {
     ).build()
 
     @Provides
-    fun provideBookDao(
+    fun provideUserDao(
         userDb: UserDb
     ) = userDb.userDao
 
     @Provides
-    fun provideBookRepository(
+    fun provideUserRepository(
         userDao: UserDao
     ): UserRepository = UserRepositoryImpl(
         userDao = userDao
